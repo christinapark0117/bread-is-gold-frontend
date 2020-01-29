@@ -15,17 +15,26 @@
 }
 
 .chef-and-recipe-show-page-card{
-    /*grid-area: card;*/
-    font-weight: bold;
-    font-size: 15px;
-    margin-left: 140px;
-    max-width: 400px;
-    text-align: left;
+    background: #dce1df;
+    display: inline-block;
+    margin: 2vw;
+    max-width: 30vw;
+    /*perspective: 1000;*/
+    position: relative;
+    text-align: center;
 }
 
 .chef-recipe-chef-img{
-    width: 350px;
-    height: 350px;
+    padding: 1.5vw 1vw 0vw;
+    width: 27vw;
+    height: 42vh;
+}
+
+.chef-recipe-chef-description{
+    text-decoration: none;
+    padding: 0px 1vw 1vw;
+    color: #000000;
+    font-weight: normal;
 }
 
 .chef-recipe-page-header{
