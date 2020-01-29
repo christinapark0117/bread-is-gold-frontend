@@ -3,7 +3,8 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    height: 80vh;
+    height: 100vh;
+    width: 100vw;
     font-family: Didot;
 
     /*display: grid;*/
@@ -17,7 +18,7 @@
 .chef-and-recipe-show-page-card{
     background: #dce1df;
     display: inline-block;
-    margin: 2vw;
+    margin-left: 5vw;
     max-width: 30vw;
     /*perspective: 1000;*/
     position: relative;
@@ -26,8 +27,8 @@
 
 .chef-recipe-chef-img{
     padding: 1.5vw 1vw 0vw;
-    width: 27vw;
-    height: 42vh;
+    width: 26vw;
+    height: 43vh;
 }
 
 .chef-recipe-chef-description{
