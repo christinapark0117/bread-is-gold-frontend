@@ -12,12 +12,13 @@
     /*grid-template-rows: 10% auto;*/
     /*grid-template-areas:*/
     /*        'header header'*/
-    /*        'card list';*/
+    /*        'chef recipes';*/
 }
 
 .chef-and-recipe-show-page-card{
     background: #dce1df;
-    display: inline-block;
+    float: left;
+    /*grid-area: chef;*/
     margin-left: 5vw;
     max-width: 30vw;
     /*perspective: 1000;*/
@@ -38,19 +39,21 @@
     font-weight: normal;
 }
 
-.chef-recipe-page-header{
-    /*grid-area: header;*/
+.chef-recipe-page-header-div{
     text-align: center;
 }
 
 .chefs-all-recipe-div{
+    float: right;
+    /*grid-area: recipes;*/
     text-align: right;
-    margin-right: 140px;
+    margin-right: 10vw;
 }
 
 .chefs-all-recipe a{
     list-style: none;
     text-decoration: none;
+    font-size: 1vw;
 }
 
 .each-chef-recipe-item{
