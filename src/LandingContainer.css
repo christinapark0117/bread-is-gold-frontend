@@ -347,6 +347,7 @@
 
 .landing-chef-card__photo {
     height: calc(194 * var(--u));
+    overflow: hidden;
     background: #ece4d4;
 }
 
