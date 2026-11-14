@@ -1,0 +1,426 @@
+/*
+ * Measurements follow the approved reference mock at a 1024px viewport.
+ * --u is "one reference pixel": 1px at 1024px wide. It grows at 60% of the
+ * window's growth (1.24px at 1440, 1.53px at 1920, capped at 1.6px) so wide
+ * screens scale up but keep some breathing room at the sides.
+ * Below 1024px it stays 1px.
+ */
+
+.landing {
+    --u: clamp(1px, calc(0.4px + 100vw * 0.6 / 1024), 1.6px);
+    --ink: #1c1a17;
+    --muted: #4f483f;
+    --paper: #f8f4ec;
+    --card: #ffffff;
+    --line: #e2d9c8;
+    --gold: #c99a52;
+    --serif-display: 'Cormorant Garamond', Georgia, serif;
+    --serif-body: 'EB Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+
+    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif-body);
+    -webkit-font-smoothing: antialiased;
+}
+
+.landing a { color: inherit; }
+
+.landing a:focus-visible,
+.landing button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* ---------- Shared bits ---------- */
+
+.landing-eyebrow {
+    margin: 0;
+    font: 500 calc(11 * var(--u))/1 var(--sans);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink);
+}
+
+.landing-eyebrow--light { color: #ffffff; font-size: calc(12 * var(--u)); letter-spacing: 0.34em; }
+
+.landing-heading {
+    margin: 0;
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: calc(40 * var(--u));
+    line-height: 1.02;
+}
+
+.landing-body {
+    margin: 0;
+    font-size: calc(17 * var(--u));
+    line-height: 1.2;
+}
+
+.landing-button {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(16 * var(--u));
+    height: max(30px, calc(30 * var(--u)));
+    padding: 0 calc(20 * var(--u));
+    box-sizing: border-box;
+    border: 1px solid #b8885a;
+    font: 500 calc(11 * var(--u))/1 var(--sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.landing-button svg { width: calc(22 * var(--u)); height: auto; }
+
+.landing-button:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+.landing .landing-button--light {
+    border-color: #ffffff;
+    color: #ffffff;
+    height: calc(34 * var(--u));
+    padding: 0 calc(22 * var(--u));
+    font-size: calc(12 * var(--u));
+    gap: calc(22 * var(--u));
+}
+.landing .landing-button--light:hover { background: #ffffff; color: var(--ink); }
+
+/* ---------- Nav ---------- */
+
+.landing-nav {
+    position: relative;
+    z-index: 2;
+    padding: calc(14 * var(--u)) calc(34 * var(--u)) 0 calc(47 * var(--u));
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+.landing-nav__logo {
+    font-family: var(--serif-display);
+    font-size: calc(24 * var(--u));
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.landing-nav__links {
+    margin-left: auto;
+    display: flex;
+    gap: 0 calc(45 * var(--u));
+    font: 500 calc(11.5 * var(--u))/1 var(--sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.landing-nav__links > a,
+.landing-nav__dropdown > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 0 6px;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.landing-nav__links > a:hover,
+.landing-nav__links > a.is-active { border-bottom-color: var(--gold); }
+
+.landing-nav__dropdown { position: relative; }
+
+.landing-nav__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    min-width: 180px;
+    padding: 8px 0;
+    background: var(--card);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    letter-spacing: 0.06em;
+}
+
+.landing-nav__dropdown:hover .landing-nav__menu,
+.landing-nav__dropdown:focus-within .landing-nav__menu { display: block; }
+
+.landing-nav__menu a {
+    display: block;
+    padding: 12px 16px;
+    color: var(--ink) !important;
+    text-decoration: none;
+}
+
+.landing-nav__menu a:hover { background: var(--paper); }
+
+.landing-nav__icons { display: flex; gap: calc(5 * var(--u)); margin-left: calc(52 * var(--u)); }
+
+.landing-nav__icons a {
+    width: calc(44 * var(--u));
+    height: calc(44 * var(--u));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.landing-nav__icons svg { width: calc(22 * var(--u)); height: calc(22 * var(--u)); }
+
+/* ---------- Hero ---------- */
+
+.landing-hero {
+    position: relative;
+    height: calc(538 * var(--u));
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    background-color: #2a2621;
+    background-image:
+        linear-gradient(90deg, rgba(18, 15, 12, 0.82) 0%, rgba(18, 15, 12, 0.5) 32%, rgba(18, 15, 12, 0) 55%),
+        linear-gradient(180deg, rgba(18, 15, 12, 0.5) 0%, rgba(18, 15, 12, 0) 18%),
+        var(--hero-image, none); /* set from LandingContainer.js */
+    background-size: cover;
+    background-position: 30% 55%;
+}
+
+.landing-hero__content {
+    padding: calc(94 * var(--u)) calc(64 * var(--u)) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.landing-hero__content .landing-eyebrow { margin-bottom: calc(20 * var(--u)); }
+
+.landing-hero__title {
+    margin: 0;
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: calc(72 * var(--u));
+    line-height: 0.95;
+}
+
+.landing-hero__rule {
+    width: calc(91 * var(--u));
+    height: 1px;
+    margin: calc(26 * var(--u)) 0 calc(24 * var(--u));
+    background: var(--gold);
+}
+
+.landing-hero__subtitle {
+    margin: 0 0 calc(30 * var(--u));
+    font-style: italic;
+    font-size: calc(23 * var(--u));
+    line-height: 1.22;
+    color: #efe8dc;
+}
+
+.landing-hero__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: calc(18 * var(--u));
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(8 * var(--u));
+    padding: 6px;
+    font: 500 calc(11 * var(--u))/1 var(--sans);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+/* ---------- Split sections ---------- */
+
+.landing-split {
+    max-width: calc(908 * var(--u));
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.landing-split__text {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#project { padding: calc(18 * var(--u)) 0 calc(8 * var(--u)) calc(19 * var(--u)); gap: calc(70 * var(--u)); }
+#project .landing-split__text { max-width: calc(375 * var(--u)); }
+#project .landing-eyebrow { margin: calc(22 * var(--u)) 0 calc(14 * var(--u)); }
+#project .landing-heading { margin-bottom: calc(18 * var(--u)); }
+#project .landing-body { margin-bottom: calc(18 * var(--u)); }
+
+/* The plate photo sits on white; a radial mask fades that white into the page. */
+.landing-split__plate {
+    flex: none;
+    width: calc(440 * var(--u));
+    height: calc(352 * var(--u));
+    margin-right: calc(-38 * var(--u));
+    overflow: hidden;
+}
+
+.landing-split__plate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    transform: scale(1.04);
+    display: block;
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 78%, transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 78%, transparent 100%);
+}
+
+.landing-split--ruled {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: calc(26 * var(--u)) 0 calc(28 * var(--u));
+    gap: calc(40 * var(--u));
+}
+
+.landing-split__logo {
+    /* longhand on purpose: CRA's postcss-flexbugs-fixes breaks `flex: 0 0 calc()` */
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(440 * var(--u));
+    display: flex;
+    justify-content: center;
+}
+
+.landing-split__logo img {
+    width: calc(318 * var(--u));
+    height: auto;
+    display: block;
+    mix-blend-mode: multiply;
+}
+
+.landing-split--ruled .landing-split__text { max-width: calc(345 * var(--u)); }
+.landing-split--ruled .landing-eyebrow { margin-bottom: calc(10 * var(--u)); }
+.landing-split--ruled .landing-heading { font-size: calc(37 * var(--u)); margin-bottom: calc(10 * var(--u)); }
+.landing-split--ruled .landing-body { margin-bottom: calc(16 * var(--u)); }
+
+/* ---------- Featured chefs ---------- */
+
+.landing-chefs {
+    max-width: calc(894 * var(--u));
+    margin: 0 auto;
+    padding: calc(14 * var(--u)) 0 calc(40 * var(--u));
+    box-sizing: border-box;
+}
+
+.landing-rule-title {
+    margin: 0 0 calc(22 * var(--u));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(50 * var(--u));
+    font-family: var(--serif-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: calc(37 * var(--u));
+    white-space: nowrap;
+}
+
+.landing-rule-title::before,
+.landing-rule-title::after {
+    content: '';
+    width: calc(208 * var(--u));
+    height: 1px;
+    background: #d9c7a6;
+}
+
+.landing-chefs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(15 * var(--u));
+}
+
+.landing-chef-card {
+    background: var(--card);
+    border: 1px solid #ebe3d4;
+}
+
+.landing-chef-card__photo {
+    height: calc(194 * var(--u));
+    background: #ece4d4;
+}
+
+.landing-chef-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+}
+
+.landing-chef-card__body { padding: calc(9 * var(--u)) calc(24 * var(--u)) calc(6 * var(--u)); }
+
+.landing-chef-card__body h3 {
+    margin: 0;
+    font-family: var(--serif-display);
+    font-weight: 500;
+    font-size: calc(21 * var(--u));
+    line-height: 1.15;
+}
+
+.landing-chef-card__body p {
+    margin: 0;
+    font-style: italic;
+    font-size: calc(15 * var(--u));
+    color: #6b6357;
+}
+
+.landing-chef-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(12 * var(--u));
+    min-height: 32px;
+    font: 500 calc(10.5 * var(--u))/1 var(--sans);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.landing-chef-card__link svg { width: calc(20 * var(--u)); height: auto; color: #b07a1e; transition: transform 0.2s; }
+.landing-chef-card__link:hover svg { transform: translateX(4px); }
+
+/* ---------- Narrow screens: stack instead of squeezing ---------- */
+
+@media (max-width: 960px) {
+    .landing-split, .landing-chefs { margin-left: 24px; margin-right: 24px; }
+}
+
+@media (max-width: 760px) {
+    .landing-nav { flex-wrap: wrap; padding: 12px 10px 0 20px; }
+    .landing-nav__logo { flex: 1 1 0; min-width: 0; font-size: 22px; }
+    .landing-nav__icons { margin-left: 0; }
+    .landing-nav__links { order: 3; width: 100%; margin-left: 0; gap: 0 20px; }
+    .landing-hero {
+        height: auto;
+        min-height: 600px;
+        background-image:
+            linear-gradient(180deg, rgba(18, 15, 12, 0.7) 0%, rgba(18, 15, 12, 0.6) 65%, rgba(18, 15, 12, 0.35) 100%),
+            var(--hero-image, none);
+        background-position: 70% center;
+    }
+    .landing-hero__content { padding: 64px 20px 110px; }
+    .landing-hero__title { font-size: 60px; }
+    .landing-split { flex-direction: column; align-items: stretch; }
+    #project { padding: 32px 0; gap: 32px; }
+    #project .landing-split__text { max-width: none; }
+    .landing-split__plate { align-self: center; width: 100%; max-width: 360px; height: 300px; margin-right: 0; }
+    .landing-split--ruled { padding: 40px 0; gap: 28px; }
+    .landing-split__logo { flex: none; }
+    .landing-split__logo img { width: 260px; }
+    .landing-split--ruled .landing-split__text { max-width: none; }
+    .landing-chefs { padding: 40px 0; }
+    .landing-rule-title { gap: 16px; font-size: 32px; }
+    .landing-rule-title::before, .landing-rule-title::after { width: auto; flex: 1; }
+    .landing-chefs__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .landing-chef-card__photo { height: 260px; }
+}

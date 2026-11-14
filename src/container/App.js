@@ -7,13 +7,15 @@ import AllRecipesContainer from "./AllRecipesContainer";
 import RecipeDetailsContainer from "./RecipeDetailsContainer";
 import WelcomeContainer from "./WelcomeContainer";
 import ChefRecipesContainer from "./ChefRecipesContainer";
+import LandingContainer from "./LandingContainer";
 
 function App() {
 
   return (
     <div className="App">
         <Switch>
-            <Route exact path='/' component={HomeScreenContainer} />
+            <Route exact path='/' component={LandingContainer} />
+            <Route exact path='/signin' component={HomeScreenContainer} />
             <Route exact path='/welcome' component={WelcomeContainer}/>
             <Route exact path='/favorites' component={FavoriteRecipesContainer} />
             <Route exact path='/chefs' component={ChefsContainer} />
