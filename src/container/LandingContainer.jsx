@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LandingNavBar from '../components/LandingNavBar';
 import FeaturedChefs from '../components/FeaturedChefs';
+import SectionLink from '../components/SectionLink';
 import useReveal from '../hooks/useReveal';
 import heroImage from '../image/Bread Is Gold Homepage Banner.PNG';
 import projectImage from '../image/extraordinary food.jpg';
@@ -18,10 +19,10 @@ const delay = (seconds) => ({ '--reveal-delay': `${seconds}s` });
 
 // "SCROLL ↓" link to the next full-screen section.
 const ScrollCue = ({ to, className = '' }) => (
-    <a href={`#${to}`} className={`landing-scroll-cue ${className}`.trim()}>
+    <SectionLink to={to} className={`landing-scroll-cue ${className}`.trim()}>
         Scroll
         <svg aria-hidden="true" width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" strokeWidth="1.2"><path d="M1 1l9 8 9-8" /></svg>
-    </a>
+    </SectionLink>
 );
 
 const LandingContainer = () => {
@@ -55,7 +56,7 @@ const LandingContainer = () => {
                                 over 150 recipes that transform everyday and overlooked ingredients into extraordinary meals.
                                 More than a cookbook, it celebrates creativity, dignity, and the power of food to bring people together.
                             </p>
-                            <a href="#food-for-soul" className="landing-button">Our story <ArrowIcon /></a>
+                            <SectionLink to="food-for-soul" className="landing-button">Our story <ArrowIcon /></SectionLink>
                         </div>
                         <div className="landing-split__plate reveal" style={delay(0.15)}>
                             <img src={projectImage} alt="Bright yellow sauce splashed across a cracked white plate" />

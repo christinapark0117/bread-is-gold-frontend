@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import SectionLink from './SectionLink';
 
 const SearchIcon = () => (
     <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -30,13 +31,13 @@ const LandingNavBar = () => (
             <NavLink to="/recipes" className={activeClass}>Recipes</NavLink>
             <NavLink to="/favorites" className={activeClass}>My Favorites</NavLink>
             <div className="landing-nav__dropdown">
-                <a href="#project" aria-haspopup="true">
+                <SectionLink to="story" aria-haspopup="true">
                     About
                     <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M2 3.5l3 3 3-3" /></svg>
-                </a>
+                </SectionLink>
                 <div className="landing-nav__menu">
-                    <a href="#project">The Project</a>
-                    <a href="#food-for-soul">Food for Soul</a>
+                    <SectionLink to="story">The Project</SectionLink>
+                    <SectionLink to="food-for-soul">Food for Soul</SectionLink>
                 </div>
             </div>
         </nav>
