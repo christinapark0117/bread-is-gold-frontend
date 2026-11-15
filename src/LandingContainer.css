@@ -260,7 +260,8 @@
     color: #efe8dc;
 }
 
-.landing-hero__scroll {
+/* "SCROLL ↓" cue pinned to the bottom center of a full-screen section. */
+.landing-scroll-cue {
     position: absolute;
     left: 50%;
     bottom: calc(18 * var(--u));
@@ -274,11 +275,27 @@
     letter-spacing: 0.3em;
     text-transform: uppercase;
     text-decoration: none;
+    color: var(--ink);
+}
+
+.landing-scroll-cue svg { animation: nudge 2s ease-in-out 2.3s infinite; }
+
+.landing .landing-hero__scroll {
     color: #ffffff;
     animation: fade-in 1s ease 1.3s both;
 }
 
-.landing-hero__scroll svg { animation: nudge 2s ease-in-out 2.3s infinite; }
+/* Project + Food for Soul share one full-screen "page" with its own cue. */
+.landing-panel {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    box-sizing: border-box;
+    padding: 0 0 calc(58 * var(--u));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 /* ---------- Motion ---------- */
 
