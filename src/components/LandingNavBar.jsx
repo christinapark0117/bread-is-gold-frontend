@@ -19,14 +19,16 @@ const HeartIcon = () => (
     </svg>
 );
 
+const activeClass = ({ isActive }) => (isActive ? 'is-active' : undefined);
+
 const LandingNavBar = () => (
     <header className="landing-nav">
         <Link to="/" className="landing-nav__logo">Bread Is Gold</Link>
 
         <nav aria-label="Main" className="landing-nav__links">
-            <NavLink to="/chefs" activeClassName="is-active">Chefs</NavLink>
-            <NavLink to="/recipes" activeClassName="is-active">Recipes</NavLink>
-            <NavLink to="/favorites" activeClassName="is-active">My Favorites</NavLink>
+            <NavLink to="/chefs" className={activeClass}>Chefs</NavLink>
+            <NavLink to="/recipes" className={activeClass}>Recipes</NavLink>
+            <NavLink to="/favorites" className={activeClass}>My Favorites</NavLink>
             <div className="landing-nav__dropdown">
                 <a href="#project" aria-haspopup="true">
                     About

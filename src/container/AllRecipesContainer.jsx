@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
+import { apiUrl } from "../api";
 import NavBar from "../components/NavBar";
 import RecipeList from "../components/RecipeList";
 import '../AllRecipesContainer.css'
-import { Route } from "react-router-dom";
 import SignOut from "../components/SignOut";
 import '../SignOut.css'
 
@@ -20,7 +20,7 @@ class AllRecipesContainer extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/recipes")
+        fetch(apiUrl('/recipes'))
             .then(resp => resp.json())
             .then(allRecipesArr => {
                 this.setState({

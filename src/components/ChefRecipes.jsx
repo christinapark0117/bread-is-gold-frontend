@@ -24,7 +24,7 @@ const ChefRecipes = props => {
                 <div className='chefs-all-recipe-div'>
                     <ul className='chefs-all-recipe'>
                         {recipes ? (recipes.map(recipe =>
-                            <Link to={`/recipes/${recipe.id}`}>
+                            <Link to={`/recipes/${recipe.id}`} key={recipe.recipe_name}>
                                 <li className='each-chef-recipe-item'>{recipe.recipe_name}</li>
                             </Link>
                             )): null}

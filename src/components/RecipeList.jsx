@@ -7,7 +7,7 @@ const RecipeList = props => {
 
     return (
         <div>
-            <Link to={`recipes/${id}`}>
+            <Link to={`/recipes/${id}`}>
                 <li className='each-recipe-item'>{recipe_name}</li>
             </Link>
         </div>

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
+import { apiUrl } from "../api";
 import NavBar from "../components/NavBar";
 import FavoriteRecipeList from "../components/FavoriteRecipeList";
 import '../FavoriteRecipesContainer.css'
-import {Link} from "react-router-dom";
 import SignOut from "../components/SignOut";
 
 class FavoriteRecipesContainer extends Component {
@@ -19,7 +19,7 @@ class FavoriteRecipesContainer extends Component {
 
     componentDidMount() {
         let favorites = [];
-        fetch("http://localhost:3000/favorites")
+        fetch(apiUrl('/favorites'))
             .then(resp => resp.json())
             .then(userData => {
                 // TODO: Filter based on user passed in

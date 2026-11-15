@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { apiUrl } from "../api";
 import { Link } from 'react-router-dom';
 import botturaPhoto from '../image/chefs/Massimo Bottura.webp';
 import hummPhoto from '../image/chefs/Daniel Humm.jpg';
@@ -25,7 +26,7 @@ const FeaturedChefs = () => {
     const [chefs, setChefs] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/chefs')
+        fetch(apiUrl('/chefs'))
             .then(resp => resp.json())
             .then(setChefs)
             .catch(() => setChefs([]));

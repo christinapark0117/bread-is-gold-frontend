@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { apiUrl } from "../api";
 import NavBar from "../components/NavBar";
 import ChefRecipes from "../components/ChefRecipes";
 import '../ChefRecipesContainer.css'
@@ -15,7 +16,7 @@ class ChefRecipesContainer extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/chefs')
+        fetch(apiUrl('/chefs'))
             .then(resp => resp.json())
             .then(chefArr => this.setState({
                 allChefs: chefArr
@@ -24,7 +25,7 @@ class ChefRecipesContainer extends Component {
 
     renderChefRecipe = () => {
         this.setState({
-            currentChef: this.state.allChefs.find(chef => chef.id === parseInt(this.props.match.url.split('/')[3]) )
+            currentChef: this.state.allChefs.find(chef => chef.id === this.props.chefId)
         })
     }
 

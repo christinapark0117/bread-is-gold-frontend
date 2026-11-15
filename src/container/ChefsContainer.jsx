@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { apiUrl } from "../api";
 import NavBar from "../components/NavBar";
 import ChefCards from "../components/ChefCards";
 import SignOut from "../components/SignOut";
@@ -15,7 +16,7 @@ class ChefsContainer extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/chefs')
+        fetch(apiUrl('/chefs'))
             .then(resp => resp.json())
             .then(chefArr => this.setState({
                 allChefs: chefArr
@@ -27,7 +28,7 @@ class ChefsContainer extends Component {
             <div className='chefs-container'>
                 <NavBar/>
                 <div className='chef-card'>
-                    {this.state.allChefs.map(chef => <ChefCards {...chef}/>)}
+                    {this.state.allChefs.map(chef => <ChefCards key={chef.id} {...chef}/>)}
                 </div>
                 <SignOut/>
             </div>
