@@ -22,8 +22,10 @@ const HeartIcon = () => (
 
 const activeClass = ({ isActive }) => (isActive ? 'is-active' : undefined);
 
-const LandingNavBar = () => (
-    <header className="landing-nav">
+// `stuck`: the banner is out of view, so the bar is pinned to the top of the
+// window with a light background (see .landing-nav.is-stuck in the CSS).
+const LandingNavBar = ({ stuck = false }) => (
+    <header className={stuck ? 'landing-nav is-stuck' : 'landing-nav'}>
         <Link to="/" className="landing-nav__logo">Bread Is Gold</Link>
 
         <nav aria-label="Main" className="landing-nav__links">

@@ -4,6 +4,7 @@ import LandingNavBar from '../components/LandingNavBar';
 import FeaturedChefs from '../components/FeaturedChefs';
 import SectionLink from '../components/SectionLink';
 import useReveal from '../hooks/useReveal';
+import useLandingScroll from '../hooks/useLandingScroll';
 import heroImage from '../image/Bread Is Gold Homepage Banner.PNG';
 import projectImage from '../image/extraordinary food.jpg';
 import foodForSoulLogo from '../image/FOOD+FOR+SOUL_LOGOTYPE.png';
@@ -27,12 +28,13 @@ const ScrollCue = ({ to, className = '' }) => (
 
 const LandingContainer = () => {
     const revealRef = useReveal();
+    const { heroRef, chefsRef, navStuck, atChefs } = useLandingScroll();
 
     return (
         <div className="landing" ref={revealRef}>
-            <section className="landing-hero" style={{ '--hero-image': `url("${heroImage}")` }}>
+            <section className="landing-hero" ref={heroRef} style={{ '--hero-image': `url("${heroImage}")` }}>
                 <div className="landing-hero__bg" aria-hidden="true" />
-                <LandingNavBar />
+                <LandingNavBar stuck={navStuck} />
                 <div className="landing-hero__content">
                     <p className="landing-eyebrow landing-eyebrow--light">Massimo Bottura's</p>
                     <h1 className="landing-hero__title">Bread <em>Is</em> Gold</h1>
@@ -79,10 +81,10 @@ const LandingContainer = () => {
                             </a>
                         </div>
                     </section>
-                    <ScrollCue to="featured-chefs" />
+                    <ScrollCue to="featured-chefs" className={atChefs ? 'is-hidden' : ''} />
                 </div>
 
-                <FeaturedChefs />
+                <FeaturedChefs ref={chefsRef} />
             </main>
         </div>
     );

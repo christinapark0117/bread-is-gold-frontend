@@ -22,7 +22,7 @@ const ArrowIcon = () => (
     </svg>
 );
 
-const FeaturedChefs = () => {
+const FeaturedChefs = ({ ref }) => {
     const [chefs, setChefs] = useState([]);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const FeaturedChefs = () => {
     });
 
     return (
-        <section id="featured-chefs" className="landing-chefs" aria-labelledby="featured-chefs-title">
+        <section id="featured-chefs" ref={ref} className="landing-chefs" aria-labelledby="featured-chefs-title">
             <h2 id="featured-chefs-title" className="landing-rule-title reveal">Featured Chefs</h2>
             <div className="landing-chefs__grid">
                 {cards.map((card, i) => (
