@@ -460,15 +460,50 @@
     background: #d9c7a6;
 }
 
-.landing-chefs__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: calc(15 * var(--u));
+/* Merry-go-round: the track holds the chefs twice and slides left by exactly
+   one set (-50%), so the loop restarts seamlessly. Cards keep the width the
+   old 3-column grid had. About 5 seconds per chef. */
+.landing-chefs__carousel {
+    --card-w: calc(288 * var(--u));
+    --card-gap: calc(15 * var(--u));
+    overflow: hidden;
+    /* soft fade where cards enter and leave */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
 }
 
+.landing-chefs__track {
+    display: flex;
+    width: max-content;
+    animation: chefs-marquee calc(var(--chef-count, 10) * 5s) linear infinite;
+}
+
+/* Hold still while someone is aiming at a card (mouse or keyboard). */
+.landing-chefs__carousel:hover .landing-chefs__track,
+.landing-chefs__carousel:focus-within .landing-chefs__track { animation-play-state: paused; }
+
+@keyframes chefs-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
 .landing-chef-card {
+    /* longhand: see .landing-split__logo */
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: var(--card-w);
+    margin-right: var(--card-gap); /* margin, not gap, so both halves are equal */
     background: var(--card);
     border: 1px solid #ebe3d4;
+}
+
+/* Placeholder until the chef's photo is added. */
+.landing-chef-card__initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: var(--serif-display);
+    font-size: calc(54 * var(--u));
+    letter-spacing: 0.06em;
+    color: #b8a98f;
 }
 
 .landing-chef-card__photo {
@@ -544,6 +579,20 @@
     .landing-chefs { padding: 40px 0; }
     .landing-rule-title { gap: 16px; font-size: 32px; }
     .landing-rule-title::before, .landing-rule-title::after { width: auto; flex: 1; }
-    .landing-chefs__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-    .landing-chef-card__photo { height: 260px; }
+    .landing-chefs__carousel { --card-w: 260px; --card-gap: 16px; }
+    .landing-chef-card__photo { height: 220px; }
+}
+
+/* Reduced motion, chef carousel: no drifting, just a row you scroll sideways
+   with one set of cards. Kept last so it overrides the carousel rules above. */
+@media (prefers-reduced-motion: reduce) {
+    .landing-chefs__carousel {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-mask-image: none;
+        mask-image: none;
+        padding-bottom: 8px;
+    }
+    .landing-chef-card { scroll-snap-align: start; }
+    .landing-chef-card--copy { display: none; }
 }
