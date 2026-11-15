@@ -42,12 +42,12 @@ const FeaturedChefs = () => {
 
     return (
         <section className="landing-chefs" aria-labelledby="featured-chefs-title">
-            <h2 id="featured-chefs-title" className="landing-rule-title">Featured Chefs</h2>
+            <h2 id="featured-chefs-title" className="landing-rule-title reveal">Featured Chefs</h2>
             <div className="landing-chefs__grid">
-                {cards.map(card => (
-                    <article className="landing-chef-card" key={card.lastName}>
+                {cards.map((card, i) => (
+                    <article className="landing-chef-card reveal" key={card.lastName} style={{ '--reveal-delay': `${0.1 + i * 0.12}s` }}>
                         <div className="landing-chef-card__photo">
-                            <img src={card.photo} alt={`Chef ${card.name}`} style={{ objectPosition: card.focus, transform: `scale(${card.zoom})`, transformOrigin: card.focus }} />
+                            <img src={card.photo} alt={`Chef ${card.name}`} style={{ objectPosition: card.focus, transformOrigin: card.focus, '--zoom': card.zoom }} />
                         </div>
                         <div className="landing-chef-card__body">
                             <h3>{card.name}</h3>
