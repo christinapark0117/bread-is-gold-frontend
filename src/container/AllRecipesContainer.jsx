@@ -102,7 +102,7 @@ const FeaturedCarousel = ({ slides }) => {
                             inert={!active}
                         >
                             <div className="recipes-slide__photo">
-                                {slide.photo ? <img src={slide.photo} alt={slide.title} /> : <PhotoPlaceholder />}
+                                {slide.photo ? <img src={slide.photo} alt={slide.title} style={slide.photoStyle} /> : <PhotoPlaceholder />}
                             </div>
                             <div className="recipes-slide__text">
                                 <p className="recipes-eyebrow">{slide.course}</p>
@@ -150,7 +150,7 @@ const RecipeCard = ({ recipe, column, liked, onToggleLike }) => (
     <li className="recipe-card reveal" style={{ '--reveal-delay': `${column * 0.08}s` }}>
         <Link to={`/recipes/${recipe.id}`} className="recipe-card__link">
             <div className="recipe-card__photo">
-                {recipe.photo ? <img src={recipe.photo} alt="" loading="lazy" /> : <PhotoPlaceholder />}
+                {recipe.photo ? <img src={recipe.photo} alt="" loading="lazy" style={recipe.photoStyle} /> : <PhotoPlaceholder />}
             </div>
             <div className="recipe-card__body">
                 <h3 className="recipe-card__title">{recipe.title}</h3>

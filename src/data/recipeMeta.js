@@ -5,6 +5,10 @@
 // - category: one of the CATEGORIES ids below; drives the filter tabs
 // - photo:    a file name inside src/image/recipes/. Leave it out and the
 //             card shows a placeholder until you add one.
+// - focus:    optional, which part of the photo to keep in the crop, as a
+//             CSS position ('50% 50%' is the center; '40% 60%' is left of
+//             center and lower). Also the point the zoom grows from.
+// - zoom:     optional, enlarges the photo inside its frame (1.5 = 150%)
 // - minutes:  total time. Leave it out and the card just doesn't show it.
 // - blurb:    one or two lines, used when the recipe is featured at the top
 //
@@ -45,63 +49,80 @@ export const RECIPE_META = {
     },
     'CREAM OF MIXED GRAINS WITH PUFFED RICE AND GOAT MILK ROYALE': {
         title: 'Cream of Mixed Grains with Puffed Rice and Goat Milk Royale',
+        photo: 'Alain Ducasse - Cream of Mixed Grains with Puffed Rice and Goat Milk Royale.jpg',
         category: 'starter',
     },
     'SPICED MEATBALLS WITH SMOKED EGGPLANT, TOASTED CHICKPEAS, AND EGGPLANT CONDIMENT': {
         title: 'Spiced Meatballs with Smoked Eggplant, Toasted Chickpeas, and Eggplant Condiment',
+        photo: 'Alain Ducasse - Spiced Meatballs.jpg',
         category: 'main',
     },
     "CHEF MASSIMO BOTTURA'S ITALIAN SALSA VERDE": {
         title: 'Italian Salsa Verde',
+        photo: 'Massimo Bottura - Italian Salsa Verde.jpg',
+        focus: '42% 57%', // the bowl
+        zoom: 1.35,
         category: 'side',
     },
     'VEGETARIAN MOQUECA': {
         title: 'Vegetarian Moqueca',
+        photo: 'Massimo Bottura - Vegetarian Moqueca.jpg',
         category: 'main',
     },
     'GREEN ASPARAGUS, YOGURT SAUCE WITH MENTON CITRUS AND CHICKWEED': {
         title: 'Green Asparagus, Yogurt Sauce with Menton Citrus and Chickweed',
+        photo: 'Mauro Colagreco - Green Asparagus.jpg',
         category: 'starter',
     },
     'SEA BASS, CELERIAC PURÉE, WILD SIRREL AND SMOKED SAUCE WITH SHELLFISH': {
         title: 'Sea Bass, Celeriac Purée, Wild Sorrel and Smoked Shellfish Sauce',
+        photo: 'Mauro Colagreco - Sea Bass.jpg',
         category: 'main',
     },
     'HIDA BEEF': {
         title: 'Hida Beef',
+        photo: 'Yoshihiro Narisawa - Hida Beef.jpg',
         category: 'main',
     },
     'LANDSCAPE OF FEBRUARY SATOYAMA': {
         title: 'Landscape of February Satoyama',
+        photo: 'Yoshihiro Narisawa - Landscape of February Satoyama.jpg',
         category: 'main',
     },
     'CRUNCHY BISCUITS WITH SARDINE CREAM & LEMON': {
         title: 'Crunchy Biscuits with Sardine Cream & Lemon',
+        photo: 'Yannick Alleno - Crunchy Biscuits with Sardine Cream.jpg',
         category: 'starter',
     },
     'SNAILS BAKED IN PARIS MUSHROOM CAP WITH PARSLEY AND GARLIC BUTTER': {
         title: 'Snails Baked in Mushroom Caps with Parsley and Garlic Butter',
+        photo: 'Yannick Alleno - Snails in Mushroom Caps.jpg',
         category: 'starter',
     },
     'QUINOA CHAUFA (chaufa de quinoa)': {
         title: 'Quinoa Chaufa',
+        photo: 'Gaston Acurio - Quinoa Chaufa.jpg',
         category: 'main',
     },
     'CLASSIC CEVICHE (ceviche clásico)': {
         title: 'Classic Ceviche',
+        photo: 'Gaston Acurio - Classic Ceviche.jpg',
         category: 'starter',
         blurb: 'White fish cured in a quick bath of lemon juice, with chile, red onion, corn and sweet potato.',
     },
     'LEMON-SCENTED RICE WITH SOYA CARAMELISED EEL': {
         title: 'Lemon-Scented Rice with Soy-Caramelised Eel',
+        photo: 'Ugo Alciati - Lemon-Scented Rice with Eel.jpg',
         category: 'main',
     },
     'ASADO NITSUKE': {
         title: 'Asado Nitsuke',
+        photo: 'Mitsuharu Tsumura - Asado Nitsuke.jpg',
         category: 'main',
     },
     'SAUTÉED BEANS': {
         title: 'Sautéed Beans',
+        photo: 'Mitsuharu Tsumura - Sauteed Beans.jpg',
         category: 'side',
     },
 };
@@ -136,6 +157,9 @@ export const describeRecipe = (recipe) => {
         title: meta.title || titleCase(key),
         category: meta.category,
         photo: photoUrl(meta.photo),
+        photoStyle: (meta.focus || meta.zoom)
+            ? { objectPosition: meta.focus, transformOrigin: meta.focus, '--zoom': meta.zoom }
+            : undefined,
         minutes: meta.minutes,
         blurb: meta.blurb,
     };
