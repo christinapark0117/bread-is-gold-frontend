@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { apiUrl } from "../api";
-import NavBar from "../components/NavBar";
 import FavoriteRecipeList from "../components/FavoriteRecipeList";
 import '../FavoriteRecipesContainer.css'
 import SignOut from "../components/SignOut";
@@ -36,7 +35,6 @@ class FavoriteRecipesContainer extends Component {
         return (
 
             <div>
-                <NavBar/>
                 <div className='favorite-recipes-container-div'>
                     <div>
                         <h3 className='favorite-recipes-header'>My Favorite Recipes</h3>

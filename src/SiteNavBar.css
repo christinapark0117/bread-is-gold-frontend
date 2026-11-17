@@ -1,0 +1,135 @@
+/*
+ * Site-wide nav bar (SiteNavBar.jsx). Same look on every page:
+ * - Home: sits on the hero photo in white, then pins to the top as a light
+ *   bar once the hero scrolls away (.is-stuck, toggled by the landing page).
+ * - Every other page: always the light bar, sticky at the top (.is-static).
+ * Sizes use --u like the landing page: 1px at 1024px wide, up to 1.6px.
+ */
+
+.site-nav {
+    --u: clamp(1px, calc(0.4px + 100vw * 0.6 / 1024), 1.6px);
+    --ink: #1c1a17;
+    --paper: #f8f4ec;
+    --card: #ffffff;
+    --line: #e2d9c8;
+    --gold: #c99a52;
+    --serif-display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+
+    box-sizing: border-box;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+}
+
+.site-nav a { color: inherit; }
+.site-nav a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.site-nav {
+    position: relative;
+    z-index: 2;
+    padding: calc(14 * var(--u)) calc(34 * var(--u)) 0 calc(47 * var(--u));
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+.site-nav__logo {
+    font-family: var(--serif-display);
+    font-size: calc(24 * var(--u));
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.site-nav__links {
+    margin-left: auto;
+    display: flex;
+    gap: 0 calc(45 * var(--u));
+    font: 500 calc(11.5 * var(--u))/1 var(--sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.site-nav__links > a,
+.site-nav__dropdown > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 9px 0 6px;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.site-nav__links > a:hover,
+.site-nav__links > a.is-active { border-bottom-color: var(--gold); }
+
+.site-nav__dropdown { position: relative; }
+
+.site-nav__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    min-width: 180px;
+    padding: 8px 0;
+    background: var(--card);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    letter-spacing: 0.06em;
+}
+
+.site-nav__dropdown:hover .site-nav__menu,
+.site-nav__dropdown:focus-within .site-nav__menu { display: block; }
+
+.site-nav__menu a {
+    display: block;
+    padding: 12px 16px;
+    color: var(--ink) !important;
+    text-decoration: none;
+}
+
+.site-nav__menu a:hover { background: var(--paper); }
+
+.site-nav__icons { display: flex; gap: calc(5 * var(--u)); margin-left: calc(52 * var(--u)); }
+
+.site-nav__icons a {
+    width: calc(44 * var(--u));
+    height: calc(44 * var(--u));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-nav__icons svg { width: calc(22 * var(--u)); height: calc(22 * var(--u)); }
+
+/* Light bar: pinned to the top with a light background and dark text.
+   Fonts, sizes and spacing stay exactly as above. On the home page the hero
+   has a fixed height, so the nav leaving its flow there moves nothing you see. */
+.site-nav.is-stuck {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    color: var(--ink);
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    animation: nav-drop 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Other pages: the light bar from the start, kept in the page flow and
+   sticking to the top as you scroll (so content never hides under it). */
+.site-nav.is-static {
+    position: sticky;
+    animation: none;
+}
+
+@keyframes nav-drop { from { transform: translateY(-100%); } to { transform: none; } }
+
+@media (max-width: 760px) {
+    .site-nav { flex-wrap: wrap; padding: 12px 10px 0 20px; }
+    .site-nav__logo { flex: 1 1 0; min-width: 0; font-size: 22px; }
+    .site-nav__icons { margin-left: 0; }
+    .site-nav__links { order: 3; width: 100%; margin-left: 0; gap: 0 20px; }
+}

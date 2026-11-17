@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import LandingNavBar from '../components/LandingNavBar';
+import React, { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SiteNavBar from '../components/SiteNavBar';
 import FeaturedChefs from '../components/FeaturedChefs';
 import SectionLink from '../components/SectionLink';
 import useReveal from '../hooks/useReveal';
@@ -29,12 +29,23 @@ const ScrollCue = ({ to, className = '' }) => (
 const LandingContainer = () => {
     const revealRef = useReveal();
     const { heroRef, chefsRef, navStuck, atChefs } = useLandingScroll();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // Arriving from another page's About menu: jump straight to that section,
+    // then clear the request so a refresh starts at the top again.
+    const section = location.state?.section;
+    useEffect(() => {
+        if (!section) return;
+        document.getElementById(section)?.scrollIntoView({ block: 'start', behavior: 'instant' });
+        navigate('.', { replace: true, state: null });
+    }, [section, navigate]);
 
     return (
         <div className="landing" ref={revealRef}>
             <section className="landing-hero" ref={heroRef} style={{ '--hero-image': `url("${heroImage}")` }}>
                 <div className="landing-hero__bg" aria-hidden="true" />
-                <LandingNavBar stuck={navStuck} />
+                <SiteNavBar mode={navStuck ? 'pinned' : 'hero'} />
                 <div className="landing-hero__content">
                     <p className="landing-eyebrow landing-eyebrow--light">Massimo Bottura's</p>
                     <h1 className="landing-hero__title">Bread <em>Is</em> Gold</h1>

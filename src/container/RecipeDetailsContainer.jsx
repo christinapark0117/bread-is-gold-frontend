@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { apiUrl } from "../api";
-import NavBar from "../components/NavBar";
 import RecipeDetails from "../components/RecipeDetails";
 import SignOut from "../components/SignOut";
 
@@ -38,7 +37,6 @@ class RecipeDetailsContainer extends Component {
 
         return (
             <div>
-                <NavBar/>
                 <RecipeDetails renderRecipe={this.state.currentRecipe} allRecipes={this.state.allRecipes}/>
                 <SignOut/>
             </div>

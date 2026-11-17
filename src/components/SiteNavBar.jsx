@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import SectionLink from './SectionLink';
+import '../SiteNavBar.css';
 
 const SearchIcon = () => (
     <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -20,36 +21,50 @@ const HeartIcon = () => (
     </svg>
 );
 
-const activeClass = ({ isActive }) => (isActive ? 'is-active' : undefined);
 
-// `stuck`: the banner is out of view, so the bar is pinned to the top of the
-// window with a light background (see .landing-nav.is-stuck in the CSS).
-const LandingNavBar = ({ stuck = false }) => (
-    <header className={stuck ? 'landing-nav is-stuck' : 'landing-nav'}>
-        <Link to="/" className="landing-nav__logo">Bread Is Gold</Link>
+// The one nav bar for the whole site.
+// mode="hero"   home page, on top of the banner photo (white text)
+// mode="pinned" home page, banner scrolled away: light bar fixed to the top
+// mode="page"   every other page: light bar, sticky at the top
+const MODE_CLASS = {
+    hero: 'site-nav',
+    pinned: 'site-nav is-stuck',
+    page: 'site-nav is-stuck is-static',
+};
 
-        <nav aria-label="Main" className="landing-nav__links">
-            <NavLink to="/chefs" className={activeClass}>Chefs</NavLink>
-            <NavLink to="/recipes" className={activeClass}>Recipes</NavLink>
-            <NavLink to="/favorites" className={activeClass}>My Favorites</NavLink>
-            <div className="landing-nav__dropdown">
+const SiteNavBar = ({ mode = 'page' }) => {
+    // A chef's recipe list lives at /recipes/chefs/:id but belongs under Chefs.
+    const { pathname } = useLocation();
+    const onChefPage = pathname.startsWith('/recipes/chefs');
+    const activeClass = (activeHere) => ({ isActive }) => (isActive && activeHere ? 'is-active' : undefined);
+
+    return (
+    <header className={MODE_CLASS[mode]}>
+        <Link to="/" className="site-nav__logo">Bread Is Gold</Link>
+
+        <nav aria-label="Main" className="site-nav__links">
+            <NavLink to="/chefs" className={({ isActive }) => (isActive || onChefPage ? 'is-active' : undefined)}>Chefs</NavLink>
+            <NavLink to="/recipes" className={activeClass(!onChefPage)}>Recipes</NavLink>
+            <NavLink to="/favorites" className={activeClass(true)}>My Favorites</NavLink>
+            <div className="site-nav__dropdown">
                 <SectionLink to="story" aria-haspopup="true">
                     About
                     <svg aria-hidden="true" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4"><path d="M2 3.5l3 3 3-3" /></svg>
                 </SectionLink>
-                <div className="landing-nav__menu">
+                <div className="site-nav__menu">
                     <SectionLink to="story">The Project</SectionLink>
                     <SectionLink to="food-for-soul">Food for Soul</SectionLink>
                 </div>
             </div>
         </nav>
 
-        <div className="landing-nav__icons">
+        <div className="site-nav__icons">
             <Link to="/recipes" aria-label="Search recipes"><SearchIcon /></Link>
             <Link to="/signin" aria-label="Sign in"><UserIcon /></Link>
             <Link to="/favorites" aria-label="My favorites"><HeartIcon /></Link>
         </div>
     </header>
-);
+    );
+};
 
-export default LandingNavBar;
+export default SiteNavBar;

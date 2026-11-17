@@ -1,18 +1,28 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// In-page link that scrolls to a section without adding `#id` to the URL.
-// Scrolling speed follows the CSS `scroll-behavior` (smooth, or instant for
-// people who ask their OS for reduced motion). The href stays as a fallback.
+// Link to a section of the home page, without adding `#id` to the URL.
+// - On the home page: scrolls there (smoothly, per the CSS `scroll-behavior`;
+//   instantly for people who ask their OS for reduced motion).
+// - On any other page: goes to the home page and lands on that section
+//   (LandingContainer reads `state.section`).
+// The href stays as a fallback for opening in a new tab.
 const SectionLink = ({ to, children, ...rest }) => {
+    const navigate = useNavigate();
+
     const handleClick = (event) => {
-        const target = document.getElementById(to);
-        if (!target) return;
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
         event.preventDefault();
-        target.scrollIntoView({ block: 'start' });
+        const target = document.getElementById(to);
+        if (target) {
+            target.scrollIntoView({ block: 'start' });
+        } else {
+            navigate('/', { state: { section: to } });
+        }
     };
 
     return (
-        <a href={`#${to}`} onClick={handleClick} {...rest}>
+        <a href={`/#${to}`} onClick={handleClick} {...rest}>
             {children}
         </a>
     );

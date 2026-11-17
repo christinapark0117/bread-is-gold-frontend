@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { apiUrl } from "../api";
-import NavBar from "../components/NavBar";
 import RecipeList from "../components/RecipeList";
 import '../AllRecipesContainer.css'
 import SignOut from "../components/SignOut";
@@ -42,7 +41,6 @@ class AllRecipesContainer extends Component {
     render() {
         return (
             <div>
-                <NavBar search={this.handleSearch} />
                 <div className='all-recipes-container-div'>
                     <div className='recipes-list-header-div'>
                         <h2 className='recipes-list-header'>Recipes List</h2>
