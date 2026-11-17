@@ -18,7 +18,7 @@ import ducassePhoto from '../image/chefs/alain ducasse.webp';
 // `focus` is the object-position that keeps the face in the card crop and
 // `zoom` enlarges photos where the chef stands farther from the camera.
 // A chef without a photo shows their initials instead.
-const CHEFS = [
+export const CHEFS = [
     { lastName: 'Bottura', name: 'Massimo Bottura', country: 'Italy', photo: botturaPhoto, focus: '50% 15%', zoom: 1 },
     { lastName: 'Humm', name: 'Daniel Humm', country: 'United States', photo: hummPhoto, focus: '45% 14%', zoom: 1.3 },
     { lastName: 'Collagreco', name: 'Mauro Colagreco', country: 'France', photo: colagrecoPhoto, focus: '50% 20%', zoom: 1 },
